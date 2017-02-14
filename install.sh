@@ -48,7 +48,7 @@ main() {
   # precedence over umasks except for filesystems mounted with option "noacl".
   umask g-w,o-w
 
-  printf "${BLUE}Cloning Oh My Zsh...${NORMAL}\n"
+  printf "${BLUE}Cloning Oh My Vim...${NORMAL}\n"
   hash git >/dev/null 2>&1 || {
     echo "Error: git is not installed"
     exit 1
@@ -70,7 +70,7 @@ main() {
   printf "${BLUE}Looking for an existing vim config...${NORMAL}\n"
   if [ -f ~/.vimrc ] || [ -h ~/.vimrc ]; then
     printf "${YELLOW}Found ~/.vimrc.${NORMAL} ${GREEN}Backing up to ~/.vimrc.pre-oh-my-vim${NORMAL}\n";
-    mv ~/.vimrc ~/.vimrc.pre-oh-my-zsh;
+    mv ~/.vimrc ~/.vimrc.pre-oh-my-vim;
   fi
 
   printf "${BLUE}Using the Oh My Vim template file and adding it to ~/.vimrc${NORMAL}\n"
