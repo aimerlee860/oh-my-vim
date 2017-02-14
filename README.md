@@ -1,2 +1,2 @@
-# vimconf
-Configurations for vim
+# Oh-
+Configurations for vim！
