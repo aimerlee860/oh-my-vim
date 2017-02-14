@@ -25,7 +25,7 @@ main() {
   set -e
 
   CHECK_VIM_INSTALLED=$(whereis vim)
-  if [ "X$CHECK_ZSH_INSTALLED" == "X" ]; then
+  if [ "X$CHECK_VIM_INSTALLED" == "X" ]; then
     printf "${YELLOW}Vim is not installed!${NORMAL} Please install vim first!\n"
     exit
   fi
@@ -88,7 +88,7 @@ main() {
   echo ''
   echo 'Please look over the ~/.vimrc file to select plugins, themes, and options.'
   echo ''
-  echo 'p.s. Follow us at aimerlee860@gmail.com.
+  echo 'p.s. Follow us at aimerlee860@gmail.com.'
   echo ''
   echo ''
   printf "${NORMAL}"
