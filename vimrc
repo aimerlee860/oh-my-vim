@@ -93,6 +93,7 @@ endtry
 
 set ffs=unix,dos,mac "Default file types
 
+
 """"""""""""""""""""""""""""""
 " => Statusline
 """"""""""""""""""""""""""""""
@@ -126,16 +127,31 @@ endfunction
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set expandtab
-set shiftwidth=4
-set tabstop=4
+set shiftwidth=2
+set tabstop=2
 set smarttab
 
 set wrap "Wrap lines
 set autoindent "Auto indent
 set smartindent "Smart indet
 
+map <TAB> gt
+map \ gT
+
+set hls
+set nocompatible
+set backspace=indent,eol,start
+
+set showmatch
+set linebreak
+
+" set autochdir
+set cursorline ""高亮显示当前行
+set completeopt=menuone,longest
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => windows
+" => Windows
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Smart way to move btw. windows
 map <C-j> <C-W>j
@@ -146,15 +162,11 @@ map <C-l> <C-W>l
 let g:tagbar_left=1
 nmap <F8> :TagbarToggle<CR>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"=>ctags
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set tags=tags;
-" map <C-]> g]
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"=>Cscope tool
+" => Ctags & Cscope Tool
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set tags=tags;
 if has("cscope")
   " set cscopetag   " 使支持用 Ctrl+]  和 Ctrl+t 快捷键在代码间跳来跳去
   " check cscope for definition of a symbol before checking ctags:
@@ -179,8 +191,9 @@ if has("cscope")
   set csverb
 endif
 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" BufExplorer
+" => BufExplorer
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:bufExplorerDefaultHelp=0       " Do not show default help.
 let g:bufExplorerShowRelativePath=1  " Show relative paths.
@@ -192,7 +205,7 @@ let g:bufExplorerUseCurrentWindow=1  " Open in new window.
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"=>winManager tool
+" => WinManager Tool
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:winManagerWindowLayout='FileExplorer,BufExplorer|TagList'   " 这里可以设置为多个窗口, 如'FileExplorer|BufExplorer|TagList'
 let g:persistentBehaviour=0              " 只剩一个窗口时, 退出vim.
@@ -204,15 +217,14 @@ nmap <silent> wm :WMToggle<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"=>C.vim
+" => C.vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
- let g:C_Ctrl_j   = 'off'
+let g:C_Ctrl_j = 'off'
 
-""lijingjie
-" set autochdir
-set cursorline ""高亮显示当前行
-set completeopt=menuone,longest
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => FileType & Signature
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype on
 augroup filetype
   autocmd! BufNewFile,BufRead,BufReadPre,BufReadPost *.proto setfiletype proto
@@ -224,26 +236,26 @@ function! SignName()
   if &filetype == 'sh'
     call setline(1,          "\#!/bin/bash")
     call append(line("."),   "\#########################################################################")
-    call append(line(".")+1, "\# Copyright FreeWheel Inc. All Rights Reserved.")
-    call append(line(".")+2, "\# Author:jjli@freewheel.tv(Li JingJie)")
+    call append(line(".")+1, "\# Copyright CodeFarmer Inc. All Rights Reserved.")
+    call append(line(".")+2, "\# Author:aimerlee860@gmail.com(JingJie Li)")
     call append(line(".")+3, "\# Created Time: ".strftime("%c"))
     call append(line(".")+4, "\#########################################################################")
                                                                                                                                                                                          
     map ` I# <ESC>
     map ~ A # <ESC>
   elseif &filetype == 'cpp' || &filetype == 'cc' || &filetype == 'c' || &filetype == 'java'
-    call setline(1,          "\// Copyright FreeWheel Inc. All Rights Reserved.")
-    call append(line("."),   "\// Author: jjli@freewheel.tv(Li JingJie)")
+    call setline(1,          "\// Copyright CodeFarmer Inc. All Rights Reserved.")
+    call append(line("."),   "\// Author: aimerlee860@gmail.com(JingJie Li)")
     call append(line(".")+1, "\// Created Time: ".strftime("%c"))
 
     map ` I// <ESC>
     map ~ A // <ESC>
   elseif &filetype == 'python'
     call setline(1,          "\#!/usr/local/bin/python")
-    call append(line("."),   "\# Copyright FreeWheel Inc. All Rights Reserved.")
+    call append(line("."),   "\# Copyright CodeFarmer Inc. All Rights Reserved.")
     call append(line(".")+1, "\# Created Time: ".strftime("%c"))
     call append(line(".")+2, "")
-    call append(line(".")+3, "\__auth__ = \'jjli@freewheel.tv (Jingjie Li)\'")
+    call append(line(".")+3, "\__auth__ = \'aimerlee860@gmail.com (Jingjie Li)\'")
 
     set foldlevel=10
 
@@ -252,8 +264,8 @@ function! SignName()
   elseif &filetype == 'proto'
     source ~/.vim/syntax/proto.vim
 
-    call setline(1,           "\// Copyright FreeWheel Inc. All Rights Reserved.")
-    call append(line("."),    "\// Author: jjli@freewheel.tv(Li JingJie)")
+    call setline(1,           "\// Copyright CodeFarmer Inc. All Rights Reserved.")
+    call append(line("."),    "\// Author: aimerlee860@gmail.com(JingJie Li)")
     call append(line(".")+1,  "\// Created Time: ".strftime("%c"))
 
     " Auto close pair.
@@ -265,8 +277,8 @@ function! SignName()
   elseif &filetype == 'thrift'
     source ~/.vim/syntax/thrift.vim
 
-    call setline(1,           "\// Copyright FreeWheel Inc. All Rights Reserved.")
-    call append(line("."),    "\// Author: jjli@freewheel.tv(Li JingJie)")
+    call setline(1,           "\// Copyright CodeFarmer Inc. All Rights Reserved.")
+    call append(line("."),    "\// Author: aimerlee860@gmail.com(JingJie Li)")
     call append(line(".")+1,  "\// Created Time: ".strftime("%c"))
 
     " Auto close pair.
@@ -277,8 +289,8 @@ function! SignName()
     map ` I// <ESC>
     map ~ A // <ESC>
   elseif &filetype == 'go'
-    call setline(1,           "\// Copyright FreeWheel Inc. All Rights Reserved.")
-    call append(line("."),    "\// Author: jjli@freewheel.tv(Li JingJie)")
+    call setline(1,           "\// Copyright CodeFarmer Inc. All Rights Reserved.")
+    call append(line("."),    "\// Author: aimerlee860@gmail.com(JingJie Li)")
     call append(line(".")+1,  "\// Created Time: ".strftime("%c"))
 
     map ` I// <ESC>
@@ -323,41 +335,3 @@ endfunction
 
 " Automatically format golang source code before writing to file
 autocmd BufWritePre *.go Fmt
-
-map <TAB> gt
-map \ gT
-
-set hls
-set nocompatible
-set backspace=indent,eol,start
-
-set showmatch
-set linebreak
-
-let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [
-        \ 'p:package',
-        \ 'i:imports:1',
-        \ 'c:constants',
-        \ 'v:variables',
-        \ 't:types',
-        \ 'n:interfaces',
-        \ 'w:fields',
-        \ 'e:embedded',
-        \ 'm:methods',
-        \ 'r:constructor',
-        \ 'f:functions'
-    \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
-    \ },
-    \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
-    \ },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-\ }
