@@ -234,16 +234,15 @@ augroup end
 autocmd BufNewFile *.cpp,*.[ch],*.cc,*.java,*.py,*.sh,*.proto,*.thrift,*.go exec ":call SignName()"
 function! SignName()
   if &filetype == 'sh'
-    call setline(1,          "\#!/bin/bash")
-    call append(line("."),   "\#########################################################################")
-    call append(line(".")+1, "\# Copyright CodeFarmer Inc. All Rights Reserved.")
-    call append(line(".")+2, "\# Author:aimerlee860@gmail.com(JingJie Li)")
-    call append(line(".")+3, "\# Created Time: ".strftime("%c"))
-    call append(line(".")+4, "\#########################################################################")
+    call setline(1,          "\#!/usr/bin/env bash")
+    call append(line("."),   "\# Copyright CodeFarmer Inc. All Rights Reserved.")
+    call append(line(".")+1, "\# Author:aimerlee860@gmail.com(JingJie Li)")
+    call append(line(".")+2, "\# Created Time: ".strftime("%c"))
+    call append(line(".")+3, "\# ==============================================================================")
                                                                                                                                                                                          
     map ` I# <ESC>
     map ~ A # <ESC>
-  elseif &filetype == 'cpp' || &filetype == 'cc' || &filetype == 'c' || &filetype == 'java'
+  elseif &filetype == 'cpp' || &filetype == 'cc' || &filetype == 'c' || &filetype == 'java' || &filetype == 'go'
     call setline(1,          "\// Copyright CodeFarmer Inc. All Rights Reserved.")
     call append(line("."),   "\// Author: aimerlee860@gmail.com(JingJie Li)")
     call append(line(".")+1, "\// Created Time: ".strftime("%c"))
@@ -251,7 +250,7 @@ function! SignName()
     map ` I// <ESC>
     map ~ A // <ESC>
   elseif &filetype == 'python'
-    call setline(1,          "\#!/usr/local/bin/python")
+    call setline(1,          "\#!/usr/bin/env python")
     call append(line("."),   "\# Copyright CodeFarmer Inc. All Rights Reserved.")
     call append(line(".")+1, "\# Created Time: ".strftime("%c"))
     call append(line(".")+2, "")
@@ -269,6 +268,7 @@ function! SignName()
     call append(line(".")+1,  "\// Created Time: ".strftime("%c"))
 
     " Auto close pair.
+    inoremap ( ()<ESC>i
     inoremap [ []<ESC>i
     inoremap { {}<ESC>i
 
@@ -285,13 +285,6 @@ function! SignName()
     inoremap ( ()<ESC>i
     inoremap [ []<ESC>i
     inoremap { {}<ESC>i
-
-    map ` I// <ESC>
-    map ~ A // <ESC>
-  elseif &filetype == 'go'
-    call setline(1,           "\// Copyright CodeFarmer Inc. All Rights Reserved.")
-    call append(line("."),    "\// Author: aimerlee860@gmail.com(JingJie Li)")
-    call append(line(".")+1,  "\// Created Time: ".strftime("%c"))
 
     map ` I// <ESC>
     map ~ A // <ESC>
@@ -305,13 +298,14 @@ function! SmartComment()
     set foldlevel=10
     map ` I# <ESC>
     map ~ A # <ESC>
-  elseif &filetype == 'cpp' || &filetype == 'cc' || &filetype == 'c' || &filetype == 'java'
+  elseif &filetype == 'cpp' || &filetype == 'cc' || &filetype == 'c' || &filetype == 'java' || &filetype == 'go'
     map ` I// <ESC>
     map ~ A // <ESC>
   elseif &filetype == 'proto'
     source ~/.vim/syntax/proto.vim
 
     " Auto close pair.
+    inoremap ( ()<ESC>i
     inoremap [ []<ESC>i
     inoremap { {}<ESC>i
 
@@ -325,9 +319,6 @@ function! SmartComment()
     inoremap [ []<ESC>i
     inoremap { {}<ESC>i
 
-    map ` I// <ESC>
-    map ~ A // <ESC>
-  elseif &filetype == 'go'
     map ` I// <ESC>
     map ~ A // <ESC>
   endif
